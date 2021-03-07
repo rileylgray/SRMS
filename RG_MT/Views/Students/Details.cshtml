@@ -1,0 +1,68 @@
+﻿@model RG_MT.Models.Student
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Student</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BirthDay)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BirthDay)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Courses)
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var course in Model.Courses)
+            {
+                <div>
+                    @Html.DisplayFor(item => course.CourseNumber)
+                </div><div>
+                    @Html.DisplayFor(item => course.CourseTitle)
+                </div><div>
+                    @Html.DisplayFor(item => course.Credits)
+                </div>
+                <br />
+            }
+        </dd>
+        <dt class="col-sm-2">
+        <p>Total Credits</p>
+        </dt>
+        <dd class="col-sm-10">
+            @{ var creditCount=0;
+                foreach (var course in Model.Courses)
+                {
+
+                    creditCount = creditCount + course.Credits;
+
+                }
+                }
+            <p>@creditCount</p>
+        </dd>
+
+    </dl>
+            </div>
+            <div>
+                <a asp-action="EnrolledCoursesEdit" asp-route-id="@Model.Id">Edit Enrolled Courses</a> |
+                <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+                <a asp-action="Index">Back to List</a>
+            </div>

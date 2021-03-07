@@ -1,0 +1,42 @@
+﻿@model StudentsCourses
+@{ 
+    ViewBag.Title = "Enrolled Courses Edit";
+} 
+<h2>Student Courses</h2>
+<table class="table">
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.student.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.student.FirstName)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.student.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.student.LastName)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Enrolled Courses
+        </td>
+        <td>
+            <form class="table" asp-action="EnrolledCoursesEdit">
+                @Html.HiddenFor(model => model.student.Id)
+                @for (int i = 0; i < Model.EnrolledClasses.Count; i++)
+                {
+                    @Html.HiddenFor(model => model.EnrolledClasses[i].Id)
+                    @Html.DisplayFor(model => model.EnrolledClasses[i].courseName)
+                    @Html.EditorFor(model => model.EnrolledClasses[i].isEnrolled)
+
+                    <br />
+                }
+                <input type="submit" value="Update" />
+            </form>
+        </td>
+    </tr>
+</table>

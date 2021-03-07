@@ -1,0 +1,65 @@
+﻿@model RG_MT.Models.Course
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Course</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CourseNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CourseNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CourseTitle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CourseTitle)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Credits)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Credits)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Students)
+        </dt>
+        <dd class="col-sm-10">
+
+            @foreach (var student in Model.Students)
+            {
+                <p>
+                    @Html.DisplayFor(item => student.FirstName)
+                    &nbsp;
+                    @Html.DisplayFor(item => student.LastName)
+                </p>
+
+                <br />
+            }
+        </dd>
+        <dt class="col-sm-2">
+            <p>Students in Class</p>
+        </dt>
+        <dd class="col-sm-10">
+            @{ var studentCount = 0;
+                foreach (var student in Model.Students)
+                {
+                    studentCount++;
+                }
+            }
+            <p>@studentCount</p>
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
